@@ -12,8 +12,6 @@ exports.getProducts = async (req, res) => {
 
 // Add a product
 exports.addProduct = async (req, res) => {
-  const { name, price } = req.body;
-  
   let image = req.body.image || 'https://via.placeholder.com/150';
   if (req.file) {
     const baseUrl = `${req.protocol}://${req.get('host')}`;
@@ -21,7 +19,7 @@ exports.addProduct = async (req, res) => {
   }
 
   try {
-    const newProduct = new Product({ name, price, image });
+    const newProduct = new Product({ ...req.body, image });
     await newProduct.save();
     res.status(201).json(newProduct);
   } catch (err) {

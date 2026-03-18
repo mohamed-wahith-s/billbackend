@@ -15,6 +15,12 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: false,
     default: 'https://via.placeholder.com/150'
+  },
+  barcode: {
+    type: String,
+    required: false,
+    unique: true,
+    sparse: true
   }
 }, {
   timestamps: true
